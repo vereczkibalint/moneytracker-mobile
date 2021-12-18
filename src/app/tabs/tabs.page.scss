@@ -1,3 +1,12 @@
+ion-tab-bar {
+  height: 60px;
+}
+
+ion-label {
+  font-family: GTProMedium, serif !important;
+  font-size: 1.3em;
+}
+
 .tab-selected {
   border-top-width: 4px;
   border-top-color: var(--ion-color-pink);

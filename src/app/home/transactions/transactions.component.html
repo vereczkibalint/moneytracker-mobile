@@ -1,0 +1,40 @@
+<div class="transactions" *ngIf="TRANSACTIONS.length > 0">
+  <div class="transaction-card" *ngFor="let transaction of TRANSACTIONS">
+    <ion-row class="ion-justify-content-between ion-padding">
+      <ion-col size="1" class="ion-align-self-center">
+        <ion-icon [name]="transaction.type === 'EXPENSE' ? 'cart' : 'cash'" size="large"></ion-icon>
+      </ion-col>
+      <ion-col size="5">
+        <ion-row class="ion-align-items-center">
+          <ion-col>
+            <ion-text class="ion-font-bold transaction-title">{{ transaction.title }}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate }}</ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="4" class="ion-align-self-center">
+        <ion-text class="ion-font-bold transaction-amount" [color]="transaction.type === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- Ft</ion-text>
+      </ion-col>
+    </ion-row>
+    <hr class="transaction-divider" />
+  </div>
+  <ion-row class="ion-justify-content-between ion-padding">
+    <ion-col size="1"></ion-col>
+    <ion-col class="ion-text-start" size="5">
+      <ion-text class="ion-font-bold">Total</ion-text>
+    </ion-col>
+    <ion-col size="4">
+      <ion-text [color]="TRANSACTIONS_SUM > 0 ? 'success' : 'danger'" class="ion-font-bold">{{ TRANSACTIONS_SUM }},- Ft</ion-text>
+    </ion-col>
+  </ion-row>
+</div>
+
+<div [hidden]="TRANSACTIONS.length > 0" class="ion-text-center">
+  <ion-text class="opacity-35 ion-font-bigger ion-font-bold">
+    No transactions found!
+  </ion-text>
+</div>

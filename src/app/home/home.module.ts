@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import {DaySelectorComponent} from './day-selector/day-selector.component';
 import {SwiperModule} from "swiper/angular";
+import { TransactionsComponent } from './transactions/transactions.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import {SwiperModule} from "swiper/angular";
     HomePageRoutingModule,
     SwiperModule
   ],
-  declarations: [HomePage, DaySelectorComponent]
+  declarations: [HomePage, DaySelectorComponent, TransactionsComponent]
 })
 export class HomePageModule {}
