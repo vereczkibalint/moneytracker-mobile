@@ -1,0 +1,47 @@
+<ion-content fullscreen>
+  <div class="auth-form">
+    <ion-row>
+      <ion-col>
+        <ion-text>
+          <h1 class="ion-font-bold ion-text-center">Login to your account!</h1>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin">
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Email address</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin">
+      <ion-col size="8">
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="2" class="ion-align-self-center">
+        <ion-button color="pink" expand="block">
+          <ion-text class="auth-button-label">&gt;</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-text class="ion-font-light">or</ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center ion-margin">
+      <ion-col>
+        <ion-text class="ion-font-light">You don't have an account? <a routerLink="/register" class="ion-text-decoration-none ion-font-bold">Sign up</a></ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <a routerLink="/forgot-password" class="ion-text-decoration-none ion-font-bold">Forgot your password?</a>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>
