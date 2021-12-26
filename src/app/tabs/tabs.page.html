@@ -1,4 +1,14 @@
 <ion-tabs>
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" translucent="true">
+    <ion-fab-button color="pink">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button>
+        <ion-icon name="grid-outline" class="ion-fab-button-icon"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
       <ion-icon name="home-outline"></ion-icon>
@@ -9,6 +19,8 @@
       <ion-icon name="wallet-outline"></ion-icon>
       <ion-label>Budgets</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button></ion-tab-button>
 
     <ion-tab-button tab="statistics">
       <ion-icon name="pie-chart-outline"></ion-icon>

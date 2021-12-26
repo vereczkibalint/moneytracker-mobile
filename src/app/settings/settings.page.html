@@ -1,6 +1,12 @@
 <ion-content fullscreen>
+  <ion-header mode="md" class="ion-no-border ion-margin-top">
+    <ion-toolbar>
+      <ion-title class="ion-font-bold ion-font-bigger">
+        Settings
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-list lines="none">
-      <ion-list-header class="ion-margin-bottom">Settings</ion-list-header>
       <ion-item>
         <ion-avatar slot="start">
           <ion-icon size="large" name="person-circle-outline"></ion-icon>
@@ -12,6 +18,10 @@
         <ion-text>
           <ion-icon color="medium" name="chevron-forward-outline"></ion-icon>
         </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Dark theme</ion-label>
+        <ion-toggle color="dark"></ion-toggle>
       </ion-item>
   </ion-list>
 </ion-content>

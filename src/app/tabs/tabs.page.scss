@@ -25,5 +25,8 @@ ion-tab-button{
 
 ion-fab-button {
   --background: var(--ion-color-pink) !important;
-  -–ion-color-base:  var(--ion-color-pink) !important;
+}
+
+.ion-fab-button-icon {
+  color: #ffffff;
 }
