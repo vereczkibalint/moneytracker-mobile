@@ -1,27 +1,41 @@
-<div class="transactions" *ngIf="TRANSACTIONS.length > 0">
-  <div class="transaction-card" *ngFor="let transaction of TRANSACTIONS">
-    <ion-row class="ion-justify-content-between ion-padding">
-      <ion-col size="1" class="ion-align-self-center">
-        <ion-icon [name]="transaction.type === 'EXPENSE' ? 'cart' : 'cash'" size="large"></ion-icon>
-      </ion-col>
-      <ion-col size="5">
-        <ion-row class="ion-align-items-center">
-          <ion-col>
-            <ion-text class="ion-font-bold transaction-title">{{ transaction.title }}</ion-text>
+<div class="transactions ion-margin-top" *ngIf="TRANSACTIONS.length > 0">
+  <ion-list>
+    <ion-item-sliding class="transaction-card" *ngFor="let transaction of TRANSACTIONS">
+      <ion-item>
+        <ion-row class="w-100 ion-justify-content-between ion-padding">
+          <ion-col size="1" class="ion-align-self-center">
+            <ion-icon [name]="transaction.type === 'EXPENSE' ? 'cart' : 'cash'" size="large"></ion-icon>
+          </ion-col>
+          <ion-col size="5">
+            <ion-row class="ion-align-items-center">
+              <ion-col>
+                <ion-text class="ion-font-bold transaction-title">{{ transaction.title }}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate }}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4" class="ion-align-self-center">
+            <ion-text class="ion-font-bold transaction-amount" [color]="transaction.type === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- Ft</ion-text>
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate }}</ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-      <ion-col size="4" class="ion-align-self-center">
-        <ion-text class="ion-font-bold transaction-amount" [color]="transaction.type === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- Ft</ion-text>
-      </ion-col>
-    </ion-row>
-    <hr class="transaction-divider" />
-  </div>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="primary" (click)="editTransactionHandler(transaction)">
+          <ion-icon name="create-outline"></ion-icon>
+          <ion-text class="ion-font-bold">Edit</ion-text>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteTransactionHandler(transaction)">
+          <ion-icon name="trash-outline"></ion-icon>
+          <ion-text class="ion-font-bold">Delete</ion-text>
+        </ion-item-option>
+      </ion-item-options>
+  </ion-item-sliding>
   <ion-row class="ion-justify-content-between ion-padding">
     <ion-col size="1"></ion-col>
     <ion-col class="ion-text-start" size="5">
@@ -31,9 +45,10 @@
       <ion-text [color]="TRANSACTIONS_SUM > 0 ? 'success' : 'danger'" class="ion-font-bold">{{ TRANSACTIONS_SUM }},- Ft</ion-text>
     </ion-col>
   </ion-row>
+  </ion-list>
 </div>
 
-<div [hidden]="TRANSACTIONS.length > 0" class="ion-text-center">
+<div [hidden]="TRANSACTIONS.length > 0" class="ion-text-center ion-margin-top">
   <ion-text class="opacity-35 ion-font-bigger ion-font-bold">
     No transactions found!
   </ion-text>

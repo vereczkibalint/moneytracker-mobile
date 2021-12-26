@@ -1,0 +1,64 @@
+<ion-header mode="md" class="ion-no-border" translucent>
+  <ion-toolbar>
+    <ion-title class="ion-font-bold ion-font-bigger">{{ transaction ? 'Edit' : 'Create' }} transaction</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-text color="pink">Close</ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-row class="ion-justify-content-center">
+    <ion-col class="ion-margin-bottom" size="11">
+      <ion-item>
+        <ion-label position="floating" color="medium" class="ion-font-bold">Title</ion-label>
+        <ion-input [value]="transaction ? transaction.title : ''"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col class="ion-margin-bottom" size="11">
+      <ion-item>
+        <ion-label position="floating" color="medium" class="ion-font-bold">Description</ion-label>
+        <ion-textarea rows="5" [value]="transaction ? transaction.description : ''"></ion-textarea>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="11">
+      <ion-list>
+        <ion-item>
+          <ion-label color="medium" class="ion-font-bold">Transaction type</ion-label>
+          <ion-select placeholder="Select one" [value]="transaction ? transaction.type : ''">
+            <ion-select-option value="EXPENSE">Expense</ion-select-option>
+            <ion-select-option value="INCOME">Income</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col class="ion-margin-bottom" size="11">
+      <ion-item>
+        <ion-label position="floating" color="medium" class="ion-font-bold">Amount (Ft)</ion-label>
+        <ion-input [value]="transaction ? transaction.amount : ''"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col class="ion-margin-bottom" size="11">
+      <ion-item>
+        <ion-label color="medium" class="ion-font-bold">Issue date</ion-label>
+        <ion-datetime [value]="transaction ? transaction.issueDate : ''"></ion-datetime>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="11">
+      <ion-button expand="block" color="pink">
+        <ion-text class="ion-font-bold">Save Transaction</ion-text>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>

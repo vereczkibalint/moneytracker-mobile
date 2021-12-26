@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, Output, ViewEncapsulation,EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-day-selector',
@@ -8,25 +8,14 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class DaySelectorComponent implements OnInit {
 
-  _yearMapping: number[];
+  @Input() selectedDate: Date;
+  @Output('onDateSelect') dateSelectionEvent = new EventEmitter<Date>();
 
-  constructor() {
-    this._yearMapping = this._populateCurrentYear();
-  }
+  constructor() {}
 
   ngOnInit() {}
 
-  _populateCurrentYear() {
-    const result = [];
+  openDateSelectorModal() {
 
-    const currentYear = new Date().getFullYear();
-
-    Array.from({ length: 12 }, (_, i) => {
-      const currentMonth = i + 1;
-      result[currentMonth] = new Date(currentYear, currentMonth, 0).getDate();
-    });
-
-    return result;
   }
-
 }

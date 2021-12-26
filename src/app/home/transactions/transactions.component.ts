@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { Component, OnInit, Output, EventEmitter, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 @Component({
   selector: 'app-transactions',
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
 })
-export class TransactionsComponent implements OnInit {
+export class TransactionsComponent implements OnInit, OnChanges {
+  @Output() editTransactionEmitter = new EventEmitter();
+  @Input() selectedDate: Date;
 
   TRANSACTIONS_SUM: number;
   TRANSACTIONS = [
@@ -49,11 +52,49 @@ export class TransactionsComponent implements OnInit {
 
   // TRANSACTIONS = [];
 
-  constructor() { }
+  constructor(private alertController: AlertController) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+    
+  }
 
   ngOnInit() {
+    this.selectedDate = new Date();
+    this.calculateSum();
+  }
+
+  calculateSum() {
     this.TRANSACTIONS_SUM = this.TRANSACTIONS.reduce((acc, val) => {
       return acc = val.type === 'EXPENSE' ? acc - val.amount : acc + val.amount
     }, 0);
+  }
+
+  async deleteTransactionHandler(transaction) {
+    const deleteConfirmationAlert = await this.alertController.create({
+      header: 'Delete confirmation',
+      message: 'Are you sure you want to delete this transaction?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {}
+      }, {
+        text: 'Confirm',
+        handler: () => {
+          this.deleteTransaction(transaction);
+        }
+      }]
+    });
+
+    await deleteConfirmationAlert.present();
+  }
+
+  editTransactionHandler(transaction) {
+    this.editTransactionEmitter.emit(transaction);
+  }
+
+  deleteTransaction(transaction) {
+    this.TRANSACTIONS = this.TRANSACTIONS.filter(t => t.id !== transaction.id);
+    this.calculateSum();
   }
 }
