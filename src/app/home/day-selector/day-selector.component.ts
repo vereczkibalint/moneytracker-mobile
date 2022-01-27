@@ -1,21 +1,16 @@
-import {Component, Input, OnInit, Output, ViewEncapsulation,EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-day-selector',
   templateUrl: './day-selector.component.html',
-  styleUrls: ['./day-selector.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./day-selector.component.scss']
 })
 export class DaySelectorComponent implements OnInit {
+  selectedDate;
 
-  @Input() selectedDate: Date;
-  @Output('onDateSelect') dateSelectionEvent = new EventEmitter<Date>();
-
-  constructor() {}
+  constructor() {
+    this.selectedDate = new Date().toISOString();
+  }
 
   ngOnInit() {}
-
-  openDateSelectorModal() {
-
-  }
 }

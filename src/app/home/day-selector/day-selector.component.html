@@ -1,6 +1,5 @@
 <div class="ion-text-center">
-  <!-- <ion-button (click)="openDateSelectorModal()" size="small" color="light">{{ selectedDate.toISOString().split('T')[0] }}</ion-button> -->
   <ion-button size="small" color="light">
-    <ion-datetime style="padding: 0" [value]="selectedDate.toISOString()"></ion-datetime>
+    <ion-datetime class="ion-date-picker" [(ngModel)]="selectedDate"></ion-datetime>
   </ion-button>
 </div>

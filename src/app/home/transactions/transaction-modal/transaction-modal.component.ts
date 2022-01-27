@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Transaction } from '../transaction.model';
 
 @Component({
   selector: 'app-transaction-modal',
@@ -6,9 +7,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./transaction-modal.component.scss'],
 })
 export class TransactionModalComponent implements OnInit {
-  @Input() dismiss;
-  @Input() transaction;
-  
+  @Input() transaction: Transaction;
+
   constructor() { }
 
   ngOnInit() {}
