@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Transaction } from '../transaction.model';
+import { Transaction } from '../../../core/models/transaction.model';
 
 @Component({
   selector: 'app-transaction-modal',

@@ -12,5 +12,5 @@ export interface Transaction {
 
 export interface TransactionResult {
   transactions: Transaction[];
-  sum?: number;
+  total: number;
 }
