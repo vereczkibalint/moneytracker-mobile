@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title class="ion-font-bold ion-font-bigger">{{ transaction ? 'Edit' : 'Create' }} transaction</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
+      <ion-button (click)="dismiss()">
         <ion-text color="pink">Close</ion-text>
       </ion-button>
     </ion-buttons>
@@ -50,7 +50,7 @@
     <ion-col class="ion-margin-bottom" size="11">
       <ion-item>
         <ion-label color="medium" class="ion-font-bold">Issue date</ion-label>
-        <ion-datetime [value]="transaction ? transaction.issueDate.toISOString() : ''"></ion-datetime>
+        <ion-datetime [value]="transaction ? transaction.issueDate : ''"></ion-datetime>
       </ion-item>
     </ion-col>
   </ion-row>

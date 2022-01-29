@@ -8,6 +8,7 @@ import { Transaction } from '../../../core/models/transaction.model';
 })
 export class TransactionModalComponent implements OnInit {
   @Input() transaction: Transaction;
+  @Input() dismiss;
 
   constructor() { }
 

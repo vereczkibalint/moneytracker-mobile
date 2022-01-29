@@ -6,7 +6,7 @@
   <div class="transactions ion-margin-top" *ngIf="transactionsLoaded | async">
     <div *ngIf="transactionsResponse.transactions.length else noTransactions">
       <ion-list>
-        <ion-item-sliding class="transaction-card" *ngFor="let transaction of transactionsResponse.transactions">
+        <ion-item-sliding #slidingItem class="transaction-card" *ngFor="let transaction of transactionsResponse.transactions">
           <ion-item>
             <ion-row class="w-100 ion-justify-content-between ion-padding">
               <ion-col size="1" class="ion-align-self-center">
@@ -32,13 +32,13 @@
             </ion-row>
           </ion-item>
           <ion-item-options side="start">
-            <ion-item-option color="primary">
+            <ion-item-option color="primary" (click)="_handleEdit(slidingItem, transaction)">
               <ion-icon name="create-outline"></ion-icon>
               <ion-text class="ion-font-bold">Edit</ion-text>
             </ion-item-option>
           </ion-item-options>
           <ion-item-options side="end">
-            <ion-item-option color="danger">
+            <ion-item-option color="danger" (click)="_handleDelete(slidingItem, transaction)">
               <ion-icon name="trash-outline"></ion-icon>
               <ion-text class="ion-font-bold">Delete</ion-text>
             </ion-item-option>
