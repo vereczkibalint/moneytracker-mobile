@@ -1,9 +1,10 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Transaction, TransactionResult } from "../../core/models/transaction.model";
 import { TransactionsService } from '../../core/services/transactions.service';
-import { AlertController, LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
+import { UtilsService } from '../../core/services/utils.service';
 
 @Component({
   selector: 'app-transactions',
@@ -20,9 +21,9 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   transactionModal = null;
 
   constructor(
+    private utilsService: UtilsService,
     private transactionService: TransactionsService,
     private alertController: AlertController,
-    private loadingController: LoadingController,
     private modalController: ModalController
   ) { }
 
@@ -37,19 +38,13 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   private async _loadTransactions() {
     this.transactionsLoaded = Promise.resolve(false);
 
-    let loadingIndicator = await this._createLoadingIndicator();
+    let loadingIndicator = await this.utilsService.createLoadingIndicator('Your transactions are being loaded...');
     await loadingIndicator.present();
 
     this.fetchTransactionsSubscription$ = this.transactionService.fetchAllTransaction().subscribe((response) => {
       this.transactionsResponse = response;
       this.transactionsLoaded = Promise.resolve(true);
       loadingIndicator.dismiss();
-    });
-  }
-
-  private _createLoadingIndicator() {
-    return this.loadingController.create({
-      message: 'Your transactions are being loaded...',
     });
   }
 
