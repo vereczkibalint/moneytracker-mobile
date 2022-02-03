@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import {DaySelectorComponent} from './day-selector/day-selector.component';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { TransactionModalComponent } from './transactions/transaction-modal/transaction-modal.component';
+import { MorePopoverComponent } from './more-popover/more-popover.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { TransactionModalComponent } from './transactions/transaction-modal/tran
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, DaySelectorComponent, TransactionsComponent, TransactionModalComponent],
+  declarations: [HomePage, DaySelectorComponent, TransactionsComponent, TransactionModalComponent, MorePopoverComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}
