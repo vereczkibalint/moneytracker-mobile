@@ -1,9 +1,31 @@
-<ion-content fullscreen>
-    <ion-header mode="md" class="ion-no-border ion-margin-top">
-        <ion-toolbar>
-            <ion-title class="ion-font-bold ion-font-bigger">
-                Budgets
-            </ion-title>
-        </ion-toolbar>
-    </ion-header>
+<ion-content fullscreen="true">
+  <ion-header mode="md" class="ion-no-border ion-margin-top">
+    <ion-toolbar>
+      <ion-title class="ion-font-bold ion-font-title">
+        Budgets
+      </ion-title>
+      <ion-buttons slot="end" class="ion-padding">
+        <ion-button>
+          <ion-icon name="add-outline" color="pink" class="toolbar-icon"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="_refreshBudgets($event)">
+    <ion-refresher-content refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="budgetsLoaded | async">
+    <div *ngIf="budgetResponse.length else noBudgets">
+      <app-budget-card *ngFor="let budget of budgetResponse" [budget]="budget"></app-budget-card>
+    </div>
+  </div>
 </ion-content>
+
+<ng-template #noBudgets>
+  <div class="ion-text-center ion-margin-top">
+    <ion-text class="opacity-35 ion-font-bigger ion-font-bold">
+      No budgets found!
+    </ion-text>
+  </div>
+</ng-template>
