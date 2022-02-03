@@ -13,6 +13,7 @@ export class TabsPage implements OnInit {
     TAB_STATISTICS: 'statistics',
     TAB_SETTINGS: 'settings'
   };
+  _TABS_WITH_FAB = [this._TABS.TAB_HOME, this._TABS.TAB_BUDGETS];
 
   constructor() { }
 
@@ -25,5 +26,15 @@ export class TabsPage implements OnInit {
 
   _checkIfTabIsSelected(tab) {
     return this._selectedTab === tab;
+  }
+
+  _isFabNeeded() {
+    return this._TABS_WITH_FAB.includes(this._selectedTab);
+  }
+
+  _handleCreateClick() {
+    switch(this._selectedTab) {
+
+    }
   }
 }

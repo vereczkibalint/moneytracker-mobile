@@ -1,13 +1,8 @@
 <ion-tabs #tabs (ionTabsDidChange)="_setSelectedTab($event)">
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" translucent="true">
-    <ion-fab-button color="pink">
+  <ion-fab *ngIf="_isFabNeeded()" vertical="bottom" horizontal="center" slot="fixed" translucent="true">
+    <ion-fab-button color="pink" (click)="_handleCreateClick()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button>
-        <ion-icon name="grid-outline" class="ion-fab-button-icon"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
   </ion-fab>
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="home">
@@ -20,7 +15,7 @@
       <ion-label>Budgets</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button></ion-tab-button>
+    <ion-tab-button *ngIf="_isFabNeeded()"></ion-tab-button>
 
     <ion-tab-button tab="statistics">
       <ion-icon [name]="_checkIfTabIsSelected(_TABS.TAB_STATISTICS) ? 'pie-chart' : 'pie-chart-outline'"></ion-icon>
