@@ -85,7 +85,15 @@
 }
 
 .ion-font-bigger {
+  font-size: 1.4em;
+}
+
+.ion-font-title {
   font-size: 1.6em;
+}
+
+.ion-font-smaller {
+  font-size: 0.7em;
 }
 
 .w-100 {
@@ -94,4 +102,8 @@
 
 .opacity-35 {
   opacity: 35%;
+}
+
+.toolbar-icon {
+  --ionicon-stroke-width: 64px;
 }
