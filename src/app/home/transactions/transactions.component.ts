@@ -76,12 +76,9 @@ export class TransactionsComponent implements OnInit, OnDestroy {
   }
 
   private async _constructTransactionModal(transaction: Transaction) {
-    const modal = await this.modalController.create({
-      component: TransactionModalComponent,
-      componentProps: {
-        transaction,
-        dismiss: () => this._dismissModal()
-      }
+    const modal = await this.utilsService.createModal(TransactionModalComponent, {
+      transaction: transaction,
+      dismiss: () => this._dismissModal()
     });
 
     this.transactionModal = modal;
