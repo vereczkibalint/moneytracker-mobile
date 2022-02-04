@@ -1,3 +1,29 @@
 .user-email {
   font-size: 0.9em;
 }
+
+.settings-menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 17px 5px;
+}
+
+.settings-menu-item:not(:first-of-type) {
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(var(--ion-color-pink-rgb), 0.1);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
+
+.settings-menu-item-label {
+  height: 18px;
+}
+
+.settings-menu-item-icon {
+  font-size: 24px;
+  --ionicon-stroke-width: 36px;
+}

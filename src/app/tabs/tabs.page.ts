@@ -34,7 +34,14 @@ export class TabsPage implements OnInit {
 
   _handleCreateClick() {
     switch(this._selectedTab) {
-
+      case this._TABS.TAB_HOME:
+        console.log('create transaction');
+        break;
+      case this._TABS.TAB_BUDGETS:
+        console.log('create budget');
+        break;
+      default:
+        return;
     }
   }
 }

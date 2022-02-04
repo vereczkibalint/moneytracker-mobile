@@ -1,27 +1,35 @@
-<ion-content fullscreen>
+<ion-content fullscreen="true">
   <ion-header mode="md" class="ion-no-border ion-margin-top">
     <ion-toolbar>
-      <ion-title class="ion-font-bold ion-font-title">
+      <ion-title color="dark" class="ion-font-bold ion-font-title">
         Settings
       </ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-list lines="none">
-      <ion-item>
-        <ion-avatar slot="start">
-          <ion-icon size="large" name="person-circle-outline"></ion-icon>
-        </ion-avatar>
-        <ion-label>
-          <h2>Vivien Szandai</h2>
-          <ion-text color="medium" class="user-email">szandaivivi@gmail.com</ion-text>
-        </ion-label>
-        <ion-text>
-          <ion-icon color="medium" name="chevron-forward-outline"></ion-icon>
-        </ion-text>
+  <ion-list class="ion-margin-top" lines="none">
+      <ion-item class="settings-menu-item">
+        <ion-icon slot="start" color="black" name="person-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold">Account</ion-text>
+        <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
       </ion-item>
-      <ion-item>
-        <ion-label>Dark theme</ion-label>
-        <ion-toggle color="dark"></ion-toggle>
+      <ion-item class="settings-menu-item">
+        <ion-icon slot="start" color="black" name="eye-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold">Appearance</ion-text>
+        <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item class="settings-menu-item">
+        <ion-icon slot="start" color="black" name="lock-closed-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold">Privacy & Security</ion-text>
+        <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item class="settings-menu-item">
+        <ion-icon slot="start" color="black" name="help-circle-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold">About</ion-text>
+        <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item class="settings-menu-item">
+        <ion-icon slot="start" color="danger" name="log-out-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold" color="danger">Log out</ion-text>
       </ion-item>
   </ion-list>
 </ion-content>
