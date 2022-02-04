@@ -7,22 +7,22 @@
     </ion-toolbar>
   </ion-header>
   <ion-list class="ion-margin-top" lines="none">
-      <ion-item class="settings-menu-item">
+      <ion-item class="settings-menu-item" [routerLink]="['/tabs/settings/account']" detail="false">
         <ion-icon slot="start" color="black" name="person-outline" class="settings-menu-item-icon"></ion-icon>
         <ion-text class="settings-menu-item-label ion-font-bold">Account</ion-text>
         <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
       </ion-item>
-      <ion-item class="settings-menu-item">
+      <ion-item class="settings-menu-item" [routerLink]="['/tabs/settings/appearance']" detail="false">
         <ion-icon slot="start" color="black" name="eye-outline" class="settings-menu-item-icon"></ion-icon>
         <ion-text class="settings-menu-item-label ion-font-bold">Appearance</ion-text>
         <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
       </ion-item>
-      <ion-item class="settings-menu-item">
+      <ion-item class="settings-menu-item" [routerLink]="['/privacy']" detail="false">
         <ion-icon slot="start" color="black" name="lock-closed-outline" class="settings-menu-item-icon"></ion-icon>
         <ion-text class="settings-menu-item-label ion-font-bold">Privacy & Security</ion-text>
         <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
       </ion-item>
-      <ion-item class="settings-menu-item">
+      <ion-item class="settings-menu-item" [routerLink]="['/about']" detail="false">
         <ion-icon slot="start" color="black" name="help-circle-outline" class="settings-menu-item-icon"></ion-icon>
         <ion-text class="settings-menu-item-label ion-font-bold">About</ion-text>
         <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SettingsPage
+  },
+  {
+    path: 'appearance',
+    loadChildren: () => import('./appearance/appearance.module').then(m => m.AppearancePageModule)
   }
 ];
 
