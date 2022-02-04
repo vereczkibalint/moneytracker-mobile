@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UtilsService} from "../core/services/utils.service";
+import {TransactionModalComponent} from "../home/transactions/transaction-modal/transaction-modal.component";
 
 @Component({
   selector: 'app-tabs',
@@ -7,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
   _selectedTab: string;
+  currentModal;
   _TABS = {
     TAB_HOME: 'home',
     TAB_BUDGETS: 'budgets',
@@ -15,10 +18,9 @@ export class TabsPage implements OnInit {
   };
   _TABS_WITH_FAB = [this._TABS.TAB_HOME, this._TABS.TAB_BUDGETS];
 
-  constructor() { }
+  constructor(private utilsService: UtilsService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   _setSelectedTab(tab) {
     this._selectedTab = tab.tab;
@@ -32,10 +34,15 @@ export class TabsPage implements OnInit {
     return this._TABS_WITH_FAB.includes(this._selectedTab);
   }
 
-  _handleCreateClick() {
+  async _handleCreateClick() {
     switch(this._selectedTab) {
       case this._TABS.TAB_HOME:
-        console.log('create transaction');
+          const modal = await this.utilsService.createModal(TransactionModalComponent, {
+            dismiss: () => this._handleCloseModal()
+          });
+
+          this.currentModal = modal;
+          await modal.present();
         break;
       case this._TABS.TAB_BUDGETS:
         console.log('create budget');
@@ -44,4 +51,13 @@ export class TabsPage implements OnInit {
         return;
     }
   }
+
+  _handleCloseModal() {
+    if(this.currentModal) {
+      this.currentModal.dismiss().then(() => {
+        this.currentModal = null;
+      });
+    }
+  }
+
 }
