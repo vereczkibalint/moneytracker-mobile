@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {IonSelect} from "@ionic/angular";
 
 @Component({
   selector: 'app-settings',
@@ -7,8 +7,16 @@ import {Router} from "@angular/router";
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  currentTheme: string;
+  @ViewChild('appearanceSelector') appearanceSelector: IonSelect;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.currentTheme = 'dark';
+  }
+
+  async _toggleAppearanceSelector() {
+    await this.appearanceSelector.open();
+  }
 }

@@ -107,3 +107,8 @@
 .toolbar-icon {
   --ionicon-stroke-width: 64px;
 }
+
+.no-ripple {
+  --ripple-color: transparent;
+  --background-activated: transparent;
+}
