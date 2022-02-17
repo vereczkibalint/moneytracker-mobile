@@ -5,6 +5,7 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
 import { UtilsService } from '../../core/services/utils.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transactions',
@@ -16,6 +17,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   transactionsLoaded: Promise<boolean>;
   fetchTransactionsSubscription$: Subscription;
+  transactionSum: number;
   transactionsResponse: TransactionResult;
 
   transactionModal = null;
@@ -41,8 +43,10 @@ export class TransactionsComponent implements OnInit, OnDestroy {
     let loadingIndicator = await this.utilsService.createLoadingIndicator('Your transactions are being loaded...');
     await loadingIndicator.present();
 
-    this.fetchTransactionsSubscription$ = this.transactionService.fetchAllTransaction().subscribe((response) => {
-      this.transactionsResponse = response;
+    this.fetchTransactionsSubscription$ = this.transactionService.fetchAllTransaction().subscribe((transactions) => {
+      this.transactionsResponse = transactions;
+      this.transactionSum = transactions.transactions.reduce((sum, transaction) => 
+        transaction.type === 'EXPENSE' ? sum - transaction.amount : sum + transaction.amount, 0);
       this.transactionsLoaded = Promise.resolve(true);
       loadingIndicator.dismiss();
     });
