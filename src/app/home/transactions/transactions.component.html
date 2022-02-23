@@ -14,7 +14,7 @@
             <ion-col size="5">
               <ion-row class="ion-align-items-center">
                 <ion-col>
-                  <ion-text class="ion-font-bold transaction-title">{{ transaction.title }}</ion-text>
+                  <ion-text class="ion-font-bold">{{ transaction.title }}</ion-text>
                 </ion-col>
               </ion-row>
               <ion-row>
@@ -44,10 +44,11 @@
   </div>
 </ion-content>
 
-<ng-template #noTransactions>
-  <div class="ion-text-center ion-margin-top">
-    <ion-text class="opacity-35 ion-font-bigger ion-font-bold">
-      No transactions found!
-    </ion-text>
-  </div>
-</ng-template>
+  <ng-template #noTransactions>
+    <div class="ion-text-center ion-margin-top">
+      <ion-text class="opacity-35 ion-font-bigger ion-font-bold">
+        No transactions found!
+      </ion-text>
+    </div>
+  </ng-template>
+</ion-content>

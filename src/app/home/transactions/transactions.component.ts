@@ -1,11 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Transaction, TransactionResult } from "../../core/models/transaction.model";
 import { TransactionsService } from '../../core/services/transactions.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { TransactionModalComponent } from './transaction-modal/transaction-modal.component';
 import { UtilsService } from '../../core/services/utils.service';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transactions',
@@ -45,7 +44,7 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
     this.fetchTransactionsSubscription$ = this.transactionService.fetchAllTransaction().subscribe((transactions) => {
       this.transactionsResponse = transactions;
-      this.transactionSum = transactions.transactions.reduce((sum, transaction) => 
+      this.transactionSum = transactions.transactions.reduce((sum, transaction) =>
         transaction.type === 'EXPENSE' ? sum - transaction.amount : sum + transaction.amount, 0);
       this.transactionsLoaded = Promise.resolve(true);
       loadingIndicator.dismiss();
