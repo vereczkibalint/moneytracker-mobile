@@ -1,0 +1,36 @@
+<ion-header>
+</ion-header>
+
+<ion-content fullscreen="true" class="ion-padding" scroll-y="false">
+  <ion-slides pager="true">
+    <ion-slide>
+      <div class="slide">
+        <ng-lottie [options]="LOTTIE_ANIMATION_OPTIONS[0]"></ng-lottie>
+        <h2>Plan your financials</h2>
+        <p>
+          With this application you can plan your expenses, incomes and manage your savings.
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <ng-lottie [options]="LOTTIE_ANIMATION_OPTIONS[1]"></ng-lottie>
+        <h2>Want to analyse your financial habits?</h2>
+        <p>
+          Based on your data we create statistics for you to follow up on your habits.
+        </p>
+      </div>
+    </ion-slide>
+
+    <ion-slide>
+      <div class="slide">
+        <h2>Ready to start with us?</h2>
+        <p>
+          We promise it will be so much fun. :)
+        </p>
+        <ion-button color="pink" (click)="redirectToAuth()">Get Started <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

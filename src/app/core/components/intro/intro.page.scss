@@ -1,0 +1,12 @@
+ion-slides {
+  height: 100%;
+}
+
+.swiper-slide h2 {
+  margin: 2.5rem auto 0 auto;
+}
+
+ion-slides {
+  --bullet-background: var(--ion-color-pink);
+  --bullet-background-active: var(--ion-color-pink);
+}
