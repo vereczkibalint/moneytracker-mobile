@@ -4,12 +4,12 @@
     </ion-refresher-content>
   </ion-refresher>
   <div class="transactions ion-margin-top" *ngIf="transactionsLoaded | async">
-    <div *ngIf="transactionsResponse.transactions.length else noTransactions">
+    <div *ngIf="transactionsResponse.length else noTransactions">
       <ion-list lines="none">
-        <ion-item class="transaction-item" *ngFor="let transaction of transactionsResponse.transactions">
+        <ion-item class="transaction-item" *ngFor="let transaction of transactionsResponse">
           <ion-row class="w-100 ion-justify-content-between ion-padding-top ion-padding-bottom">
             <ion-col size="1" class="ion-align-self-center">
-              <ion-icon [name]="transaction.category.icon" size="large"></ion-icon>
+              <ion-icon name="wallet-outline" size="large"></ion-icon>
             </ion-col>
             <ion-col size="5">
               <ion-row class="ion-align-items-center">
@@ -19,12 +19,12 @@
               </ion-row>
               <ion-row>
                 <ion-col>
-                  <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate }}</ion-text>
+                  <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate | date:'YYYY-MM-dd' }}</ion-text>
                 </ion-col>
               </ion-row>
             </ion-col>
             <ion-col size="4" class="ion-align-self-center">
-              <ion-text class="ion-font-bold transaction-amount" [color]="transaction.type === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- Ft
+              <ion-text class="ion-font-bold transaction-amount" [color]="transaction.transactionType === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- Ft
               </ion-text>
             </ion-col>
           </ion-row>
@@ -35,7 +35,7 @@
             <ion-text class="ion-font-bold">Total</ion-text>
           </ion-col>
           <ion-col size="4">
-            <ion-text [color]="transactionsResponse.total > 0 ? 'success' : 'danger'" class="ion-font-bold">{{ transactionSum.toLocaleString('hu-HU') }},- Ft
+            <ion-text [color]="transactionSum > 0 ? 'success' : 'danger'" class="ion-font-bold">{{ transactionSum.toLocaleString('hu-HU') }},- Ft
             </ion-text>
           </ion-col>
         </ion-row>
