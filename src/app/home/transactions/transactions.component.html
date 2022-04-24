@@ -3,7 +3,7 @@
     <ion-refresher-content refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
-  <div class="transactions ion-margin-top" *ngIf="transactionsLoaded | async">
+  <div class="transactions" *ngIf="transactionsLoaded | async">
     <div *ngIf="transactionsResponse.length else noTransactions">
       <ion-list lines="none">
         <ion-item class="transaction-item" *ngFor="let transaction of transactionsResponse">
