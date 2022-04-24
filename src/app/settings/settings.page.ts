@@ -8,14 +8,11 @@ import {AuthService} from "../auth/auth.service";
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-  currentTheme: string;
   @ViewChild('appearanceSelector') appearanceSelector: IonSelect;
 
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-    this.currentTheme = 'dark';
-  }
+  ngOnInit() { }
 
   async _toggleAppearanceSelector() {
     await this.appearanceSelector.open();
