@@ -1,0 +1,121 @@
+<ion-header mode="md" class="ion-no-border" translucent="true">
+  <ion-toolbar>
+    <ion-title class="ion-font-bold ion-font-title">Create Budget</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismiss()">
+        <ion-text color="pink">Close</ion-text>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="budgetForm" (ngSubmit)="_submitBudget()">
+    <ion-row class="ion-margin-bottom ion-justify-content-center ion-align-items-center">
+      <ion-col size="11">
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Title</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <div class="validation-errors ion-margin-top">
+          <ng-container *ngFor="let validation of form_messages.title">
+            <div class="error-message"
+                 *ngIf="budgetForm.get('title').hasError(validation.type) && (budgetForm.get('title').dirty || budgetForm.get('title').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom ion-justify-content-center ion-align-items-center">
+      <ion-col size="11">
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Budget amount</ion-label>
+          <ion-input formControlName="budgetAmount"></ion-input>
+        </ion-item>
+        <div class="validation-errors ion-margin-top">
+          <ng-container *ngFor="let validation of form_messages.budgetAmount">
+            <div class="error-message"
+                 *ngIf="budgetForm.get('budgetAmount').hasError(validation.type) && (budgetForm.get('budgetAmount').dirty || budgetForm.get('budgetAmount').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom ion-justify-content-center ion-align-items-center">
+      <ion-col size="11">
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Currency</ion-label>
+          <ion-select formControlName="currency">
+            <ion-select-option value="HUF">HUF</ion-select-option>
+            <ion-select-option value="EUR">EUR</ion-select-option>
+            <ion-select-option value="USD">USD</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="validation-errors ion-margin-top">
+          <ng-container *ngFor="let validation of form_messages.currency">
+            <div class="error-message"
+                 *ngIf="budgetForm.get('currency').hasError(validation.type) && (budgetForm.get('currency').dirty || budgetForm.get('currency').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom ion-justify-content-center ion-align-items-center">
+      <ion-col size="11">
+        <ion-item>
+          <ion-label position="floating" color="medium" class="ion-font-bold">Target date</ion-label>
+          <ion-datetime formControlName="budgetTarget"></ion-datetime>
+        </ion-item>
+        <div class="validation-errors ion-margin-top">
+          <ng-container *ngFor="let validation of form_messages.budgetTarget">
+            <div class="error-message"
+                 *ngIf="budgetForm.get('budgetTarget').hasError(validation.type) && (budgetForm.get('budgetTarget').dirty || budgetForm.get('budgetTarget').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin-bottom ion-justify-content-center">
+      <ion-col class="ion-margin-bottom" size="11">
+        <ion-item>
+          <ion-label color="medium" class="ion-font-bold">Color</ion-label>
+          <input
+            formControlName="colorCode"
+            readonly
+            [style.background-color]="color"
+            [style.border]="'none'"
+            [style.color]="color"
+            [(colorPicker)]="color"
+            [cpOKButton] = "true"
+            [cpOKButtonText] = "'Select'"
+            [cpCancelButton] = "true"
+            [cpSaveClickOutside] = "false"
+            [cpDisableInput]="false"
+            [cpAlphaChannel]="'disabled'"
+            [cpOutputFormat]="'hex'"
+            [cpAddColorButton]="true"
+            (colorPickerChange)="_onColorPickerChanged($event)"
+          />
+        </ion-item>
+        <div class="validation-errors ion-margin-top">
+          <ng-container *ngFor="let validation of form_messages.colorCode">
+            <div class="error-message"
+                 *ngIf="budgetForm.get('colorCode').hasError(validation.type) && (budgetForm.get('colorCode').dirty || budgetForm.get('colorCode').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11">
+        <ion-button expand="block" color="pink" type="submit">
+          <ion-text class="ion-font-bold">Save Budget</ion-text>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>
