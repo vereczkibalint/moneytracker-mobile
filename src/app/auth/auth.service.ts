@@ -9,11 +9,12 @@ import {LoginDto} from "./dto/login.dto";
 
 import { environment } from '../../environments/environment';
 import {TokenDto} from "./dto/token.dto";
-import {StorageService} from "../core/services/storage.service";
 import {Storage} from "@ionic/storage";
+import {UserDto} from "./dto/user.dto";
 
 const helper = new JwtHelperService();
 const TOKEN_KEY = 'jwt-token';
+const USER_KEY = 'user';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class AuthService {
   }
 
   public user: Observable<any>;
+  private tokenData = new BehaviorSubject(null);
   private userData = new BehaviorSubject(null);
 
   loadStoredToken() {
@@ -41,7 +43,7 @@ export class AuthService {
       map(token => {
         if(token) {
           let decoded = helper.decodeToken(token);
-          this.userData.next(decoded);
+          this.tokenData.next(decoded);
           return true;
         } else {
           return null;
@@ -55,12 +57,13 @@ export class AuthService {
       `${environment.API_URL}/login`,
       loginDto
     ).pipe(
-      map((response: TokenDto)=> {
+      map((response: TokenDto) => {
+        console.log(response.jwt);
         return response.jwt;
       }),
       switchMap(token => {
         let decoded = helper.decodeToken(token);
-        this.userData.next(decoded);
+        this.tokenData.next(decoded);
 
         let storageObservable = from(this.storage.set(TOKEN_KEY, token));
         return storageObservable;
@@ -70,13 +73,29 @@ export class AuthService {
 
   register() {}
 
-  getUser() {
-    return this.userData.getValue();
+  fetchLoggedInUserData() {
+    return this.http.get(
+      `${environment.API_URL}/users/me`
+    ).pipe(
+      map((response: UserDto) => {
+        return response;
+      }),
+      switchMap(user => {
+        this.userData.next(user);
+
+        let storageObservable = from(this.storage.set(USER_KEY, user));
+        return storageObservable;
+      })
+    );
   }
 
   logout() {
-    this.storage.remove(TOKEN_KEY).then(() => {
-      this.router.navigateByUrl('/auth');
+    Promise.all([
+      this.storage.remove(TOKEN_KEY),
+      this.storage.remove(USER_KEY)
+    ])
+    .then(() => {
+      this.router.navigateByUrl('/auth', { replaceUrl: true });
       this.userData.next(null);
     })
   }
