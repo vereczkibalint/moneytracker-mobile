@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
 import { Budget } from '../models/budget.model';
 import { environment } from '../../../environments/environment';
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,13 @@ export class BudgetService {
 
   fetchAllBudget(): Observable<Budget[]> {
     return this.http.get<Budget[]>(this.API_URL);
+  }
+
+  createBudget(budget: Budget): Observable<Budget> {
+    return this.http.post<Budget>(`${this.API_URL}/create`, budget).pipe(catchError(this.handleError));
+  }
+
+  handleError(error: HttpErrorResponse) {
+    return throwError(error);
   }
 }

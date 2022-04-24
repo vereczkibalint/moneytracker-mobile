@@ -1,11 +1,9 @@
 export interface Budget {
-  id: number;
-  userId: number;
-  targetYear: number;
-  targetMonth: number;
+  id?: number;
+  budgetTarget: Date;
   title: string;
-  totalAmount: number;
-  remainingAmount: number;
+  budgetAmount: number;
+  remainingAmount?: number;
   currency: string;
-  color: string;
+  colorCode: string;
 }

@@ -1,15 +1,15 @@
-<ion-card class="ion-margin-bottom" [ngStyle]="{'border-left': '10px solid ' + budget.color}">
+<ion-card class="ion-margin-bottom" [ngStyle]="{'border-left': '10px solid ' + budget.colorCode}">
   <ion-card-header>
     <ion-card-subtitle class="ion-font-bold">{{ budget.title }}</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content>
     <div class="budget-remaining-row">
       <ion-text class="ion-font-bold ion-font-bigger">
-        {{ budget.totalAmount - budget.remainingAmount }} {{ budget.currency }}
-        <ion-text class="ion-font-smaller">({{ ((budget.remainingAmount / budget.totalAmount) * 100).toFixed() }}%)</ion-text>
+        {{ budget.budgetAmount - budget.remainingAmount }} {{ budget.currency }}
+        <ion-text class="ion-font-smaller">({{ ((budget.remainingAmount / budget.budgetAmount) * 100).toFixed() }}% used up)</ion-text>
       </ion-text>
-      <ion-text class="ion-font-bold">{{ budget.totalAmount }} {{ budget.currency }}</ion-text>
+      <ion-text class="ion-font-bold">{{ budget.budgetAmount }} {{ budget.currency }}</ion-text>
     </div>
-    <ion-progress-bar [value]="((budget.totalAmount - budget.remainingAmount) / budget.totalAmount)" style="--progress-background: {{budget.color}};"></ion-progress-bar>
+    <ion-progress-bar [value]="((budget.budgetAmount - budget.remainingAmount) / budget.budgetAmount)" style="--progress-background: {{budget.colorCode}};"></ion-progress-bar>
   </ion-card-content>
 </ion-card>
