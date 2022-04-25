@@ -1,10 +1,11 @@
 import {Category} from "./category.model";
+import {Budget} from "./budget.model";
 
 export type TransactionType = 'EXPENSE' | 'INCOME';
 
 export interface Transaction {
   id: number;
-  userId: number;
+  budget: Budget;
   title: string;
   description: string;
   transactionType: TransactionType;
