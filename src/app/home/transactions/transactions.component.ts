@@ -16,7 +16,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
   transactionsLoaded: Promise<boolean>;
   fetchTransactionsSubscription$: Subscription;
-  transactionSum: number;
   transactionsResponse: Transaction[];
 
   transactionModal = null;
@@ -44,8 +43,6 @@ export class TransactionsComponent implements OnInit, OnDestroy {
 
     this.fetchTransactionsSubscription$ = this.transactionService.fetchRecentTransactions().subscribe((transactions) => {
       this.transactionsResponse = transactions;
-      this.transactionSum = transactions.reduce((sum, transaction) =>
-        transaction.transactionType === 'EXPENSE' ? sum - transaction.amount : sum + transaction.amount, 0);
       this.transactionsLoaded = Promise.resolve(true);
       loadingIndicator.dismiss();
     });
