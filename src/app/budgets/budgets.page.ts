@@ -47,7 +47,9 @@ export class BudgetsPage implements OnInit, OnDestroy {
 
   _refreshBudgets(event) {
     this._loadBudgets().then(() => {
-      event.target.complete();
+      if(event) {
+        event.target.complete();
+      }
     });
   }
 

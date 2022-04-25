@@ -17,7 +17,7 @@
   </ion-refresher>
   <div *ngIf="budgetsLoaded | async">
     <div *ngIf="budgetResponse.length else noBudgets">
-      <app-budget-card *ngFor="let budget of budgetResponse" [budget]="budget"></app-budget-card>
+      <app-budget-card *ngFor="let budget of budgetResponse" [budget]="budget" (pageShouldRefresh)="_refreshBudgets($event)"></app-budget-card>
     </div>
   </div>
 </ion-content>

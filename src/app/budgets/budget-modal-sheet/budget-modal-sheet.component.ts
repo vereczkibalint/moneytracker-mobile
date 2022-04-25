@@ -18,7 +18,7 @@ export class BudgetModalSheetComponent implements OnInit {
   color: string = '';
   isLoading: Promise<boolean>;
 
-  form_messages = {
+  FORM_MESSAGES = {
     'title': [
       { type: 'required', message: 'Title is required!' },
     ],
