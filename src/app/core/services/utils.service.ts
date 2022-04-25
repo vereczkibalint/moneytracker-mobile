@@ -30,7 +30,7 @@ export class UtilsService {
       animated: false,
       translucent: true,
       showBackdrop: false,
-      mode: 'md',
+      mode: 'ios',
       event
     });
   }
