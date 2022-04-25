@@ -16,9 +16,8 @@ export class TabsPage implements OnInit {
     TAB_STATISTICS: 'statistics',
     TAB_SETTINGS: 'settings'
   };
-  _TABS_WITH_FAB = [this._TABS.TAB_HOME, this._TABS.TAB_BUDGETS];
 
-  constructor(private utilsService: UtilsService) { }
+  constructor() { }
 
   ngOnInit() { }
 
@@ -28,36 +27,6 @@ export class TabsPage implements OnInit {
 
   _checkIfTabIsSelected(tab) {
     return this._selectedTab === tab;
-  }
-
-  _isFabNeeded() {
-    return this._TABS_WITH_FAB.includes(this._selectedTab);
-  }
-
-  async _handleCreateClick() {
-    switch(this._selectedTab) {
-      case this._TABS.TAB_HOME:
-          const modal = await this.utilsService.createModal(TransactionModalComponent, {
-            dismiss: () => this._handleCloseModal()
-          });
-
-          this.currentModal = modal;
-          await modal.present();
-        break;
-      case this._TABS.TAB_BUDGETS:
-        console.log('create budget');
-        break;
-      default:
-        return;
-    }
-  }
-
-  _handleCloseModal() {
-    if(this.currentModal) {
-      this.currentModal.dismiss().then(() => {
-        this.currentModal = null;
-      });
-    }
   }
 
 }

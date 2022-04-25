@@ -1,5 +1,5 @@
 <ion-tabs #tabs (ionTabsDidChange)="_setSelectedTab($event)">
-  <ion-tab-bar style="overflow: auto; justify-content: flex-start;" slot="bottom">
+  <ion-tab-bar style="overflow: auto; justify-content: center;" slot="bottom">
     <ion-tab-button tab="home">
       <ion-icon [name]="_checkIfTabIsSelected(_TABS.TAB_HOME) ? 'home' : 'home-outline'"></ion-icon>
       <ion-label>Home</ion-label>
