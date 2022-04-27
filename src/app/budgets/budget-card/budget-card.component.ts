@@ -1,8 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Budget } from '../../core/models/budget.model';
-import {AlertController, PopoverController} from "@ionic/angular";
+import {AlertController, ModalController, PopoverController} from "@ionic/angular";
 import {BudgetsPopoverComponent} from "../budgets-popover/budgets-popover.component";
 import {BudgetService} from "../../core/services/budget.service";
+import {BudgetModalSheetComponent} from "../budget-modal-sheet/budget-modal-sheet.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-budget-card',
@@ -13,8 +15,10 @@ export class BudgetCardComponent implements OnInit {
   @Input() budget: Budget;
   @Output() pageShouldRefresh = new EventEmitter();
   budgetPopover: HTMLIonPopoverElement;
+  sheetModal: HTMLIonModalElement;
+  apiErrors: Observable<any>;
 
-  constructor(private budgetService: BudgetService, private popoverController: PopoverController, private alertController: AlertController) { }
+  constructor(private budgetService: BudgetService, private popoverController: PopoverController, private modalController: ModalController, private alertController: AlertController) { }
 
   ngOnInit() { }
 
@@ -39,6 +43,27 @@ export class BudgetCardComponent implements OnInit {
   async _handleEdit(budget: Budget) {
     await this.budgetPopover.dismiss();
     this.budgetPopover = null;
+
+    const sheetModal = await this.modalController.create({
+      component: BudgetModalSheetComponent,
+      swipeToClose: true,
+      componentProps: {
+        budget: budget,
+        apiErrors: this.apiErrors,
+        dismiss: () => this._dismissModal()
+      }
+    });
+
+    this.sheetModal = sheetModal;
+    await sheetModal.present();
+  }
+
+  async _dismissModal() {
+    if(this.sheetModal) {
+      await this.sheetModal.dismiss();
+      this.sheetModal = null;
+      this.pageShouldRefresh.emit();
+    }
   }
 
   async _handleDelete(budget: Budget) {

@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {validateHexadecimalValue} from "../../core/validators/hexadecimal.validator";
 import {validateCurrency} from "../../core/validators/currency.validator";
 import {UtilsService} from "../../core/services/utils.service";
+import {Budget} from "../../core/models/budget.model";
 
 @Component({
   selector: 'app-budget-modal-sheet',
@@ -12,6 +13,7 @@ import {UtilsService} from "../../core/services/utils.service";
 })
 export class BudgetModalSheetComponent implements OnInit {
   @Input() dismiss;
+  @Input() budget?: Budget;
 
   budgetForm: FormGroup;
   submitted: boolean = false;
@@ -38,17 +40,17 @@ export class BudgetModalSheetComponent implements OnInit {
   };
 
 
-  constructor(private formBuilder: FormBuilder, private budgetService: BudgetService, private utilsService: UtilsService) {
-    this.color = this._generateRandomHexaColor();
-  }
+  constructor(private formBuilder: FormBuilder, private budgetService: BudgetService, private utilsService: UtilsService) { }
 
   ngOnInit() {
+    this.color = this.budget?.colorCode ?? this._generateRandomHexaColor();
+
     this.budgetForm = this.formBuilder.group({
-      title: [null, Validators.required],
-      budgetAmount: [0, [Validators.required, Validators.min(1)]],
-      budgetTarget: [null, Validators.required],
+      title: [this.budget?.title ?? null, Validators.required],
+      budgetAmount: [this.budget?.budgetAmount ?? 0, [Validators.required, Validators.min(1)]],
+      budgetTarget: [this.budget?.budgetTarget ?? null, Validators.required],
       colorCode: [this.color, [Validators.required, validateHexadecimalValue]],
-      currency: [null, [Validators.required, validateCurrency]]
+      currency: [this.budget?.currency ?? null, [Validators.required, validateCurrency]]
     });
   }
 
@@ -64,24 +66,35 @@ export class BudgetModalSheetComponent implements OnInit {
   async _submitBudget() {
     this.isLoading = Promise.resolve(true);
 
-    let loadingIndicator = await this.utilsService.createLoadingIndicator('Your budget is being created...');
+    let loadingIndicator = await this.utilsService.createLoadingIndicator(this.budget ? 'Your budget is being updated...' : 'Your budget is being created...');
     await loadingIndicator.present();
 
     this.submitted = true;
     if(this.budgetForm.valid) {
-      this.budgetService.createBudget({
+      const budgetDto = {
         title: this.budgetForm.controls['title'].value,
         budgetAmount: this.budgetForm.controls['budgetAmount'].value,
         currency: this.budgetForm.controls['currency'].value,
         budgetTarget: this.budgetForm.controls['budgetTarget'].value,
         colorCode: this.budgetForm.controls['colorCode'].value
-      }).subscribe(() => {
-        this.isLoading = Promise.resolve(false);
-        loadingIndicator.dismiss();
-        this.dismiss();
-      }, (error) => {
-        console.log('error', error);
-      });
+      };
+      if(this.budget) {
+        this.budgetService.updateBudget(budgetDto, this.budget.id).subscribe(() => {
+          this.isLoading = Promise.resolve(false);
+          loadingIndicator.dismiss();
+          this.dismiss();
+        }, (error) => {
+          console.log('error during update', error);
+        })
+      } else {
+        this.budgetService.createBudget(budgetDto).subscribe(() => {
+          this.isLoading = Promise.resolve(false);
+          loadingIndicator.dismiss();
+          this.dismiss();
+        }, (error) => {
+          console.log('error', error);
+        });
+      }
     }
   }
 }

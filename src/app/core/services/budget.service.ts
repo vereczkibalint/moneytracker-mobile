@@ -20,6 +20,10 @@ export class BudgetService {
     return this.http.post<Budget>(`${this.API_URL}/create`, budget).pipe(catchError(this.handleError));
   }
 
+  updateBudget(budget: Budget, id: number): Observable<Budget> {
+    return this.http.put<Budget>(`${this.API_URL}/change_details/${id}`, budget).pipe(catchError(this.handleError));
+  }
+
   deleteBudget(budgetId: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/${budgetId}`).pipe(catchError(this.handleError));
   }
