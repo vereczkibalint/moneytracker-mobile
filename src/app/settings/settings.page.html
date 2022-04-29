@@ -17,6 +17,11 @@
         <ion-text class="settings-menu-item-label ion-font-bold">Appearance</ion-text>
         <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
       </ion-item>
+      <ion-item class="settings-menu-item no-ripple" [routerLink]="['/settings/preferences']" detail="false">
+        <ion-icon slot="start" color="black" name="cog-outline" class="settings-menu-item-icon"></ion-icon>
+        <ion-text class="settings-menu-item-label ion-font-bold">Preferences</ion-text>
+        <ion-icon slot="end" color="black" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
       <ion-item class="settings-menu-item no-ripple" [routerLink]="['/privacy']" detail="false">
         <ion-icon slot="start" color="black" name="lock-closed-outline" class="settings-menu-item-icon"></ion-icon>
         <ion-text class="settings-menu-item-label ion-font-bold">Privacy & Security</ion-text>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/settings"></ion-back-button>
+    </ion-buttons>
+    <ion-title>User preferences</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="preferences-wrapper">
+    <div class="transaction-preference">
+      <ion-text class="preference-label ion-font-bold">
+        Recent transactions limit
+      </ion-text>
+      <ion-select [selectedText]="currentPreferences.transactionLimit" [value]="currentPreferences.transactionLimit" class="ion-font-regular transaction-preference-selector" (ionChange)="_setNewTransactionLimit($event)">
+        <ion-select-option value="5">5</ion-select-option>
+        <ion-select-option value="10">10</ion-select-option>
+        <ion-select-option value="15">15</ion-select-option>
+      </ion-select>
+    </div>
+  </div>
+</ion-content>

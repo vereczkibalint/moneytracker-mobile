@@ -1,0 +1,23 @@
+.preferences-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.transaction-preference {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80vw;
+  padding: 5px;
+  border-top: 1px solid var(--ion-color-light);
+  border-bottom: 1px solid var(--ion-color-light);
+}
+
+.transaction-preference-selector {
+  border: 1px solid var(--ion-color-light);
+  border-radius: 15px;
+}
