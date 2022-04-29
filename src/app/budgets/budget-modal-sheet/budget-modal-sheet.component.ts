@@ -66,11 +66,11 @@ export class BudgetModalSheetComponent implements OnInit {
   async _submitBudget() {
     this.isLoading = Promise.resolve(true);
 
-    let loadingIndicator = await this.utilsService.createLoadingIndicator(this.budget ? 'Your budget is being updated...' : 'Your budget is being created...');
-    await loadingIndicator.present();
-
     this.submitted = true;
     if(this.budgetForm.valid) {
+      let loadingIndicator = await this.utilsService.createLoadingIndicator(this.budget ? 'Your budget is being updated...' : 'Your budget is being created...');
+      await loadingIndicator.present();
+
       const budgetDto = {
         title: this.budgetForm.controls['title'].value,
         budgetAmount: this.budgetForm.controls['budgetAmount'].value,
