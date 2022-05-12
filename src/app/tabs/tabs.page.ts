@@ -9,7 +9,6 @@ import {TransactionModalComponent} from "../home/transactions/transaction-modal/
 })
 export class TabsPage implements OnInit {
   _selectedTab: string;
-  currentModal;
   _TABS = {
     TAB_HOME: 'home',
     TAB_BUDGETS: 'budgets',

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Your transactions</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="pink">
+        <ion-icon name="filter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="_refreshTransactions($event)">
+    <ion-refresher-content refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list lines="none" class="ion-margin-top">
+    <div *ngFor="let transaction of transactions">
+      <ion-item [ngStyle]="{'border-left': '10px solid ' + transaction.budget.colorCode}" class="transaction-item">
+        <ion-row class="w-100 ion-justify-content-between ion-padding-top ion-padding-bottom">
+          <ion-col size="1" class="ion-align-self-center">
+            <ion-icon name="wallet-outline" size="large"></ion-icon>
+          </ion-col>
+          <ion-col size="5">
+            <ion-row class="ion-align-items-center">
+              <ion-col>
+                <ion-text class="ion-font-bold">{{ transaction.title }}</ion-text>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-text class="ion-font-medium transaction-date">{{ transaction.issueDate | date:'YYYY-MM-dd' }}</ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="4" class="ion-align-self-center">
+            <ion-text class="ion-font-bold transaction-amount" [color]="transaction.transactionType === 'EXPENSE' ? 'danger' : 'success'">{{ transaction.amount }},- {{ transaction.budget.currency }}
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </div>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="_loadMoreTransactions($event)" [disabled]="infiniteScrollDisabled">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading transactions...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

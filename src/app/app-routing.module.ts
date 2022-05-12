@@ -9,6 +9,10 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'all-transactions',
+    loadChildren: () => import('./home/transactions/all-transactions/all-transactions.module').then( m => m.AllTransactionsPageModule)
+  },
+  {
     path: 'auth',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthPageModule)
   },

@@ -6,7 +6,7 @@
   <div class="transactions" *ngIf="transactionsLoaded | async">
     <div *ngIf="transactionsResponse.length else noTransactions">
       <ion-list lines="none">
-        <ion-item class="transaction-item" *ngFor="let transaction of transactionsResponse">
+        <ion-item class="transaction-item" [ngStyle]="{'border-left': '10px solid ' + transaction.budget.colorCode}" *ngFor="let transaction of transactionsResponse">
           <ion-row class="w-100 ion-justify-content-between ion-padding-top ion-padding-bottom">
             <ion-col size="1" class="ion-align-self-center">
               <ion-icon name="wallet-outline" size="large"></ion-icon>
@@ -30,6 +30,11 @@
           </ion-row>
         </ion-item>
       </ion-list>
+      <div class="ion-text-center ion-margin-top">
+        <ion-text class="ion-font-bold" style="color: var(--ion-color-pink)" [routerLink]="['/all-transactions']">
+          Show all transactions
+        </ion-text>
+      </div>
     </div>
   </div>
 </ion-content>
